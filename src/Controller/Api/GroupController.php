@@ -21,7 +21,7 @@ class GroupController extends AbstractController
      * @Route(
      *     name="get_groups",
      *     path="api/groups",
-     *     methods={"GET"},
+     *     methods={"GET"}
      *   )
      */
     public function index(Request $request)
@@ -33,7 +33,7 @@ class GroupController extends AbstractController
      * @Route(
      *     name="add_group",
      *     path="api/groups",
-     *     methods={"POST"},
+     *     methods={"POST"}
      *   )
      */
     public function addGroup(Request $request)

@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Group;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,8 +16,31 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class GroupRepository extends ServiceEntityRepository
 {
+
+    protected $entityManager;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Group::class);
+        $this->entityManager = $this->getEntityManager();
+    }
+
+    public function assignUser(int $groupId, User $user)
+    {
+        try {
+
+            $group = $this->findOneBy(array('id' => $groupId));
+            if ($group) {
+                $group->addUser($user);
+            }
+            $this->entityManager->persist($group);
+            $this->entityManager->flush();
+
+        } catch(ORMException $exception) {
+            //Log here...
+            return false;
+        }
+
+        return true;
     }
 }
