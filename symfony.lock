@@ -93,6 +93,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "facebook/webdriver": {
+        "version": "1.6.0"
+    },
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
@@ -120,6 +123,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "symfony/browser-kit": {
+        "version": "v4.2.8"
+    },
     "symfony/cache": {
         "version": "v4.2.8"
     },
@@ -142,6 +148,9 @@
     "symfony/contracts": {
         "version": "v1.0.2"
     },
+    "symfony/css-selector": {
+        "version": "v4.2.8"
+    },
     "symfony/debug": {
         "version": "v4.2.8"
     },
@@ -149,6 +158,9 @@
         "version": "v4.2.8"
     },
     "symfony/doctrine-bridge": {
+        "version": "v4.2.8"
+    },
+    "symfony/dom-crawler": {
         "version": "v4.2.8"
     },
     "symfony/dotenv": {
@@ -212,8 +224,33 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/panther": {
+        "version": "v0.3.0"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "9dbf01cf67d791746ec772fe274c4d91cbf3c9ec"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "config/bootstrap.php",
+            "phpunit.xml.dist",
+            "tests/.gitignore"
+        ]
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.11.0"
+    },
+    "symfony/polyfill-php72": {
+        "version": "v1.11.0"
+    },
+    "symfony/process": {
+        "version": "v4.2.8"
     },
     "symfony/property-access": {
         "version": "v4.2.8"
@@ -259,6 +296,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.2.8"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.5"
     },
     "symfony/validator": {
         "version": "4.1",
