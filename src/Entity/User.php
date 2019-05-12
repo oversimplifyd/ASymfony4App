@@ -25,7 +25,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
-     *
      */
     private $name;
 
@@ -152,7 +151,9 @@ class User implements UserInterface
         return $this->getEmail();
     }
 
-    public function eraseCredentials(){}
+    public function eraseCredentials()
+    {
+    }
 
     public function getRoles()
     {
@@ -166,6 +167,7 @@ class User implements UserInterface
     public function getDetails()
     {
         return [
+            'id' => $this->getId(),
             'name' => $this->getName(),
             'email' => $this->getEmail(),
             'date_added' => $this->getDateAdded()

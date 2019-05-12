@@ -25,7 +25,7 @@ class GroupRepository extends ServiceEntityRepository
         $this->entityManager = $this->getEntityManager();
     }
 
-    public function assignUser(int $groupId, User $user)
+    public function assignUser(int $groupId, User $user) :bool
     {
         try {
 
@@ -35,6 +35,57 @@ class GroupRepository extends ServiceEntityRepository
             }
             $this->entityManager->persist($group);
             $this->entityManager->flush();
+
+        } catch(ORMException $exception) {
+            //Log here...
+            return false;
+        }
+
+        return true;
+    }
+
+    public function unAssignUser(int $groupId, User $user) :bool
+    {
+        try {
+
+            $group = $this->findOneBy(array('id' => $groupId));
+            if ($group) {
+                $group->removeUser($user);
+            }
+            $this->entityManager->persist($group);
+            $this->entityManager->flush();
+
+        } catch(ORMException $exception) {
+            //Log here...
+            return false;
+        }
+
+        return true;
+    }
+
+    public function create(Group $group) :bool
+    {
+        try {
+
+            $this->entityManager->persist($group);
+            $this->entityManager->flush();
+
+        } catch(ORMException $exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function delete(int $groupId) :bool
+    {
+        try {
+
+            $group = $this->findOneBy(array('id' => $groupId));
+            if ($group) {
+                $this->entityManager->remove($group);
+                $this->entityManager->flush();
+            }
 
         } catch(ORMException $exception) {
             //Log here...

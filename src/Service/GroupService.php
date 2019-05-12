@@ -12,4 +12,20 @@ class GroupService
     {
         $this->groupRepository = $groupRepository;
     }
+
+    public function getGroups()
+    {
+        $results = [];
+        $groups = $this->groupRepository->findAll();
+
+        foreach ($groups as $group) {
+            $results[] = [
+                'Id' => $group->getId(),
+                'Name' => $group->getName(),
+                'Code' => $group->getCode()
+            ];
+        }
+
+        return $results;
+    }
 }

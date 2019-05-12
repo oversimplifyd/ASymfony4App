@@ -23,6 +23,7 @@ class UserService
         foreach ($users as $user) {
             if ($user->getRoles()[0] !== 'ROLE_ADMIN') {
                 $results[] = [
+                    'Id' => $user->getId(),
                     'Full Name' => $user->getName(),
                     'Email' => $user->getEmail()
                 ];
@@ -37,16 +38,18 @@ class UserService
         $groups = [];
         foreach ($user->getGroups() as $group) {
             $groups[] = [
+                'id' => $group->getId(),
                 'name' => $group->getName(),
                 'code' => $group->getCode()
             ];
         }
 
         return [
+            'id' => $user->getId(),
             'name' => $user->getName(),
             'email' => $user->getEmail(),
             'date_added' => $user->getDateAdded(),
-            'group' => $groups
+            'groups' => $groups
         ];
     }
 }

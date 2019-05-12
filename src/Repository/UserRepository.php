@@ -24,7 +24,7 @@ class UserRepository extends ServiceEntityRepository
         $this->entityManager = $this->getEntityManager();
     }
 
-    public function create(User $user)
+    public function create(User $user) :bool
     {
         try {
 
@@ -38,7 +38,7 @@ class UserRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function delete(int $userId)
+    public function delete(int $userId) :bool
     {
         try {
 

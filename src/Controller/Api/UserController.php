@@ -25,7 +25,8 @@ class UserController extends AbstractController
     public function __construct(
         UserRepository $userRepository,
         GroupRepository $groupRepository,
-        UserService $userService) {
+        UserService $userService
+    ) {
 
         $this->userRepository = $userRepository;
         $this->userService = $userService;
@@ -108,7 +109,12 @@ class UserController extends AbstractController
      */
     public function removeUserFromGroup(Request $request, int $userId, int $groupId)
     {
-        return $this->json($this->userRepository->findAll());
+        $user = $this->userRepository->findOneBy(array('id' => $userId));
+        if ($this->groupRepository->unAssignUser($groupId, $user)) {
+            return $this->json($this->userService->getUserWithGroups($user));
+        }
+
+        return $this->json(self::STATUS_FAILED, Response::HTTP_BAD_REQUEST);
     }
 
     /**

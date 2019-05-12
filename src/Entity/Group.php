@@ -131,4 +131,14 @@ class Group
 
         return $this;
     }
+
+    public function getDetails()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'code' => $this->getCode(),
+            'created_at' => $this->getCreatedAt()
+        ];
+    }
 }
