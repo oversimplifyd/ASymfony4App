@@ -170,7 +170,6 @@ class User implements UserInterface
             'id' => $this->getId(),
             'name' => $this->getName(),
             'email' => $this->getEmail(),
-            'date_added' => $this->getDateAdded()
         ];
     }
 }

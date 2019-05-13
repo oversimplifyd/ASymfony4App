@@ -48,7 +48,6 @@ class UserService
             'id' => $user->getId(),
             'name' => $user->getName(),
             'email' => $user->getEmail(),
-            'date_added' => $user->getDateAdded(),
             'groups' => $groups
         ];
     }

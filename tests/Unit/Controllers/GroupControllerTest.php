@@ -8,11 +8,15 @@ class GroupControllerTest extends \Symfony\Bundle\FrameworkBundle\Tests\TestCase
     protected $groupRepository;
     protected $request;
 
+    protected $validator;
+
     public function setup()
     {
         $this->groupService = $this->createMock(\App\Service\GroupService::class);
         $this->groupRepository =  $this->createMock(\App\Repository\GroupRepository::class);
         $container = $this->createMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
+
+        $this->validator = \Symfony\Component\Validator\Validation::createValidator();
 
         $container->expects($this->any())
             ->method("getParameter")
@@ -34,42 +38,46 @@ class GroupControllerTest extends \Symfony\Bundle\FrameworkBundle\Tests\TestCase
 
     public function testIndexSuccess()
     {
-        $this->userService->expects($this->any())
-            ->method('getAllUsers')
-            ->will($this->returnValue($this->getTestUsers()));
+        $this->groupService->expects($this->once())
+            ->method('getGroups')
+            ->will($this->returnValue($this->getTestGroup()));
 
         $this->assertEquals(
-            json_encode($this->getTestUsers()),
+            json_encode($this->getTestGroup()),
             $this->controller->index()->getContent()
         );
     }
 
-    public function testAddUserSuccess()
+    public function testAddGroup()
     {
+        $this->request->request->set('name', 'Test Group');
+        $this->request->request->set('code', '123456');
 
+        $this->groupRepository->expects($this->any())
+            ->method('create')
+            ->will($this->returnValue(true));
+
+        $this->assertEquals(
+            json_encode($this->getTestGroupDetails()),
+            $this->controller->addGroup($this->request, $this->validator)->getContent()
+        );
     }
 
-    public function testAddUserFailure()
-    {
-
-    }
-
-    public function testAssignUserToGroup()
-    {
-
-    }
-
-    public function testUnassignUserToGroup()
-    {
-
-    }
-
-    private function getTestUsers()
+    private function getTestGroup()
     {
         return [
-            'Id' => 1,
-            'Full Name' => "James",
-            'Email' => "james@email.com"
+            'Id' => null,
+            'Name' => 'Test Group',
+            'Code' => '123456'
+        ];
+    }
+
+    private function getTestGroupDetails()
+    {
+        return [
+            'id' => null,
+            'name' => 'Test Group',
+            'code' => '123456'
         ];
     }
 }

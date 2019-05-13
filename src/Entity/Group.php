@@ -138,7 +138,6 @@ class Group
             'id' => $this->getId(),
             'name' => $this->getName(),
             'code' => $this->getCode(),
-            'created_at' => $this->getCreatedAt()
         ];
     }
 }
